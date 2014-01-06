@@ -1,0 +1,9 @@
+{% if producers_list %}
+    <ul>
+    {% for producer in producers_list %}
+        <li><a href="/goods/{{producer.id }}/">{{ producer.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No producers are available.</p>
+{% endif %}
