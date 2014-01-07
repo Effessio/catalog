@@ -1,7 +1,7 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from goods.models import Producer,Product
 from django.template import RequestContext, loader
+from django.shortcuts import render, get_object_or_404
 
 
 def index(request):
@@ -13,8 +13,10 @@ def index(request):
     })
     return HttpResponse(template.render(context))
 
-def prod(request, producer_id):
-    return HttpResponse("You're looking goods of producer: %s." % producer_id)
+def detail(request, producer_id):
+    producer = get_object_or_404(Producer, pk=producer_id)
+    return render(request, 'goods/detail.html', {'producer': producer})
+
 
 
 

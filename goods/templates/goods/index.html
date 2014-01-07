@@ -1,7 +1,7 @@
 {% if producers_list %}
     <ul>
     {% for producer in producers_list %}
-        <li><a href="/goods/{{producer.id }}/">{{ producer.name }}</a></li>
+        <li><a href="{% url 'detail' producer.id %}">{{ producer.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

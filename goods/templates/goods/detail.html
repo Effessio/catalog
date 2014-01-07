@@ -1,0 +1,7 @@
+<h1> {{producer.name}} </h1>
+<ul>
+{% for product in producer.name_set.all %}
+    <li>{{ product.name }}</li>
+{% endfor %}
+</ul>
+
