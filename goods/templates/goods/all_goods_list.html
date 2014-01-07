@@ -1,0 +1,11 @@
+{% if product_list %}
+    <table border="1px">
+    {% for product in product_list %}
+        <tr>
+            <td><a href="{% url 'description' product.id %}">{{ product.name }}</a></td>
+            <td>{{ product.producer }}</td>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No products are available.</p>
+{% endif %}
