@@ -21,3 +21,6 @@ def detail(request, producer_id):
 
 
 
+
+
+
