@@ -25,7 +25,7 @@ def description(request, product_id):
 
 def all_goods(request):
     product_list = Product.objects.all()
-    return render(request, 'goods/all_goods_list.html', {'product_list' : product_list})
+    return render(request, 'goods/all_goods_list.html', {'product_list' : product_list,})
 
 
 

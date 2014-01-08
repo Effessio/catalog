@@ -10,10 +10,11 @@ class ProducerAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_filter = ['producer','edit_date']
     fieldsets = [
-        (None,               {'fields': ['name']}),
+        (None,               {'fields': ['name', 'article']}),
         ('Producer information',{'fields': ['producer', 'description']}),
-        ('Date information', {'fields': ['pub_date','edit_date']}),
-    ]
+     #   ('Date information', {'fields': ['pub_date','edit_date']}),
+        ]
+    search_fields = ['name','producer__name']
 
 
 
