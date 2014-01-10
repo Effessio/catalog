@@ -1,11 +1,16 @@
+{% load staticfiles %}
+       <link rel="stylesheet" type="text/css" href="{% static 'goods/bootstrap.css' %}" />
+
 {% if product_list %}
-    <table border="1px">
-    {% for product in product_list %}
+    <table class="table table-striped" border="1px">
+        <tbody>
+        {% for product in product_list %}
         <tr>
             <td>{{product.article}}</td>
             <td><a href="{% url 'description' product.id %}">{{ product.name }}</a></td>
             <td>{{ product.producer }}</td>
     {% endfor %}
+        <tbody>
     </table>
 {% else %}
     <p>No products are available.</p>
