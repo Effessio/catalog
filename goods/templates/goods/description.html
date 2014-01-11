@@ -1,4 +1,12 @@
-<h1> {{ product.name }} </h1>
-<p>{{ product.description}} </p>
-<p>{{ product.edit_date}} </p>
-<p>{{ product.pub_date}} </p>
+{% extends "goods/base.html" %}
+{% block sidebar %} {{ block.super }} {% endblock %}
+{% block content %}
+<div class="container">
+    <h1> {{ product.name }} </h1>
+    <article class="row">
+        <p class="span3"> {{ product.description}}</p>
+        <p class="span3">{{ product.edit_date}} </p>
+        <p class="span3">{{ product.pub_date}} </p>
+    </article>
+</div>
+{% endblock %}

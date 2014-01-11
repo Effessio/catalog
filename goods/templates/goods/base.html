@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load staticfiles %}
+       <link rel="stylesheet" type="text/css" href="{% static 'goods/bootstrap.css' %}" />
+    <title></title>
+</head>
+<body>
+{% block sidebar %}
+    <ul class="nav nav-tabs nav-stacked span3" style="background-color:#888888">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="goods/all">All</a></li>
+        <li>Here should be menu</li>
+        <li>menu</li>
+        <li>Here should be menu</li>
+        <li>menu</li>
+        <li>Here should be menu</li>
+        <li>menu</li>
+    </ul>
+{% endblock %}
+{% block content %}{% endblock %}
+
+</body>
+</html>
