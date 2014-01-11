@@ -1,17 +1,20 @@
 {% extends "goods/base.html" %}
+        <h1>Catalog</h1>
 {% block sidebar %} {{ block.super }} {% endblock %}
 {% block content %}
 {% if product_list %}
+    <div class="span10">
     <table class="table table-hover">
         <tbody>
         {% for product in product_list %}
         <tr>
             <td>{{product.article}}</td>
             <td><a href="{% url 'description' product.id %}">{{ product.name }}</a></td>
-            <td>{{ product.producer }}</td>
+            <td><a href="{% url 'producer_list' product.producer.id %}">{{ product.producer }}</a></td>
+
     {% endfor %}
         <tbody>
-    </table>
+    </table></div>
 {% else %}
     <p>No products are available.</p>
 {% endif %}

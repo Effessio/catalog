@@ -2,7 +2,7 @@
 {% block sidebar %} {{ block.super }} {% endblock %}
 {% block content %}
 {% if producers_list %}
-    <ul>
+    <ul class="span4">
     {% for producer in producers_list %}
         <li><a href="{% url 'producer_list' producer.id %}">{{ producer.name }}</a></li>
     {% endfor %}

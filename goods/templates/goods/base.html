@@ -7,16 +7,18 @@
 </head>
 <body>
 {% block sidebar %}
-    <ul class="nav nav-tabs nav-stacked span3" style="background-color:#888888">
+    <div>
+    <ul class="nav nav-tabs nav-stacked span4" style="background-color:#C6E2FF">
         <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="goods/all">All</a></li>
-        <li>Here should be menu</li>
+        <li><a href="{% url 'all_goods_list' %}">All</a></li>
+        <li></li>
         <li>menu</li>
         <li>Here should be menu</li>
         <li>menu</li>
         <li>Here should be menu</li>
         <li>menu</li>
     </ul>
+    </div>
 {% endblock %}
 {% block content %}{% endblock %}
 
