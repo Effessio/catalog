@@ -2,7 +2,7 @@
 {% block sidebar %} {{ block.super }} {% endblock %}
 {% block content %}
     <h1> {{producer.name}} </h1>
-    <ul>
+    <ul class="span4">
     {% for product in producer.product_set.all %}
         <li><a href="{% url 'description' product.id %}">{{ product.name }}</a></li>
     {% endfor %}
