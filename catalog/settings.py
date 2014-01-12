@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'goods',
+    'goods', 'users',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,6 +50,9 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'catalog.urls'
+
+
+AUTH_USER_MODEL = 'users.User'
 
 WSGI_APPLICATION = 'catalog.wsgi.application'
 
