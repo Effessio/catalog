@@ -1,9 +1,9 @@
 from django.contrib import admin
-from users.models import UserForm
+from users.models import User
 
-"""class UserFormAdmin(admin.ModelAdmin):
+class UserAdmin(admin.ModelAdmin):
     fields = ['user_name', 'password']
 
 
 
-admin.site.register(UserForm,UserFormAdmin)"""
+admin.site.register(User,UserAdmin)
