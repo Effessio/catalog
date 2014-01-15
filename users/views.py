@@ -7,13 +7,14 @@ from users.forms import UserForm
 
 
 def userform(request):
+    print "AA"
     if request.method == 'POST': # If the form has been submitted...
         form = UserForm(request.POST) # A form bound to the POST data
         if form.is_valid():
             user_name = form.cleaned_data['user_name']
             password = form.cleaned_data['password']
             User.objects.create_user(user_name,password)
-            return HttpResponseRedirect('/users_list/') # Redirect after POST
+            return HttpResponseRedirect('users_list') # Redirect after POST
     else:
         form = UserForm()  # An unbound form
     return render(request, 'users/login.html', {'form': form,})
