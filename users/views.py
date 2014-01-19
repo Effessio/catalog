@@ -17,7 +17,8 @@ def userform(request):
             return HttpResponseRedirect('users_list') # Redirect after POST
     else:
         form = UserForm()  # An unbound form
-    return render(request, 'users/register.html', {'form': form,})
+    return render(request, 'users/register.html', {'form': form})
+
 
 def users_list(request):
     users_list = User.objects.all()
