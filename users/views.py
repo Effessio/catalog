@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from users.models import User
 from users.forms import UserForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -42,4 +42,9 @@ def userlogin(request):
 
 def bad(request):
     return render(request, 'users/bad.html')
+
+
+def userlogout(request):
+    logout(request)
+    HttpResponseRedirect('goods/all')
 
