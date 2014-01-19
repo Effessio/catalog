@@ -48,4 +48,4 @@ def bad(request):
 
 def userlogout(request):
     logout(request)
-    HttpResponseRedirect('/goods')
+    return HttpResponseRedirect('/goods')

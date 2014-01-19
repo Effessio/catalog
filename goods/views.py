@@ -1,7 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from goods.models import Producer, Product
 from django.template import RequestContext, loader
 from django.shortcuts import render, get_object_or_404
+from goods.forms import ProductForm
 
 
 def index(request):
@@ -26,3 +27,24 @@ def description(request, product_id):
 def all_goods(request):
     product_list = Product.objects.all()
     return render(request, 'goods/all_goods_list.html', {'product_list': product_list})
+
+
+def addproduct(request,producer_id):
+    errormessage = ''
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            try:
+                Producer.objects.get(id = producer_id)
+
+            except Producer.DoesNotExist:
+                errormessage='producer does not exist'
+            else:
+                if request.user.producer_id == producer_id:
+                    form = ProductForm(request.POST)
+                    product = form.save()
+                    return HttpResponseRedirect(product.get_absolute_url)
+                else:
+                    errormessage = 'you do not have a permission to add goods to this producer'
+        else:
+            errormessage='user is not authentificated'
+    return render(request, 'goods/addproduct.html', errormessage)

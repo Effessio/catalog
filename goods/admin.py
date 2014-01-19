@@ -3,7 +3,7 @@ from goods.models import Producer,Product
 
 
 class ProducerAdmin(admin.ModelAdmin):
-    fields = ['name','pub_date']
+    list_display = ['name','moderator']
 
 
 

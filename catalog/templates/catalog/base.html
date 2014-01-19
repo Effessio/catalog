@@ -19,6 +19,9 @@
             {% if request.user.is_authenticated %}
                 User: {{ request.user.user_name}}
                 <a href="{% url 'logout' %}">logout</a>
+                {% if request.user.producer %}
+                    <li><a href="{% url 'addproduct' %}">add product</a></li>
+                {% endif %}
             {% else %}
             <a href="{% url 'login' %}">login</a>
             {% endif %}
