@@ -12,8 +12,7 @@ class Producer(models.Model):
 
     def __unicode__(self):
         return self.name
-    def get_absolute_url(self):
-        return '/goods/products/%s/' % self.id
+
 
 
 class Product(models.Model):
@@ -26,3 +25,5 @@ class Product(models.Model):
 
     def __unicode__(self):
         return self.name
+    def get_absolute_url(self):
+        return '/goods/products/%s/' % self.id

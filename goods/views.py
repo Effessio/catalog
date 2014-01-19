@@ -29,10 +29,26 @@ def all_goods(request):
     return render(request, 'goods/all_goods_list.html', {'product_list': product_list})
 
 
-def addproduct(request,producer_id):
-    errormessage = ''
+
+
+def add_product(request,producer_id):
     if request.method == 'POST':
-        if request.user.is_authenticated:
+        form = ProductForm(request.POST)
+        product=form.save(commit=False)
+        product.producer_id = producer_id
+        product.save()
+        return HttpResponseRedirect(product.get_absolute_url())
+    else:
+        form = ProductForm()
+        return render(request,'goods/add_product.html',{'form':form})
+
+
+
+
+
+
+
+"""if request.user.is_authenticated:
             try:
                 Producer.objects.get(id = producer_id)
 
@@ -47,4 +63,5 @@ def addproduct(request,producer_id):
                     errormessage = 'you do not have a permission to add goods to this producer'
         else:
             errormessage='user is not authentificated'
-    return render(request, 'goods/addproduct.html', errormessage)
+    return render(request, 'goods/add_product.html', {'product_id':product_id,
+                                                     "error")"""
