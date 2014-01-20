@@ -1,12 +1,15 @@
 {% extends "catalog/base.html" %}
 {% block sidebar %} {{ block.super }} {% endblock %}
 {% block content %}
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
     <h1> {{ product.name }} </h1>
     <article class="row">
         <p class="span3"> {{ product.description}}</p>
-        <p class="span3">{{ product.edit_date}} </p>
+        <p class="span3"><strong>edit date</strong> {{ product.edit_date}} </p>
         <p class="span3">{{ product.pub_date}} </p>
+        {% if request.user.is_authenticated and product.producer.moderator == request.user %}
+                <p class = "span3"><a href="{%url 'edit' product.id%}">edit</a></p>
+    {% endif %}
     </article>
 </div>
 {% endblock %}
