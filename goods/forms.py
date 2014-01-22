@@ -1,4 +1,4 @@
-from goods.models import Product,Producer
+from goods.models import Product
 from django.forms import ModelForm
 
 

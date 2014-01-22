@@ -4,10 +4,8 @@ from users.models import User
 from users.forms import UserForm
 from django.contrib.auth import authenticate, login, logout
 
-# Create your views here.
 
-
-def userform(request):
+def user_form(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
@@ -16,16 +14,16 @@ def userform(request):
             User.objects.create_user(user_name, password)
             return HttpResponseRedirect('users_list')
     else:
-        form = UserForm()  # An unbound form
-    return render(request, 'users/register.html', {'form': form})
+        form = UserForm()
+    return render(request, 'users/login_or_register.html', {'form': form})
 
 
 def users_list(request):
-    users_list = User.objects.all()
-    return render(request, 'users/users_list.html', {'users_list': users_list})
+    user_list = User.objects.all()
+    return render(request, 'users/users_list.html', {'user_list': user_list})
 
 
-def userlogin(request):
+def user_login(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
@@ -39,13 +37,13 @@ def userlogin(request):
                 return HttpResponseRedirect('/goods')
     else:
         form = UserForm()
-    return render(request, 'users/register.html', {'form': form})
+    return render(request, 'users/login_or_register.html', {'form': form})
 
 
 def bad(request):
     return render(request, 'users/bad.html')
 
 
-def userlogout(request):
+def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/goods')

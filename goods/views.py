@@ -6,10 +6,10 @@ from goods.forms import ProductForm
 
 
 def index(request):
-    producer_list = Producer.objects.order_by('-pub_date')[:5]
+    producers_list = Producer.objects.order_by('-pub_date')[:5]
     template = loader.get_template('catalog/index.html')
     context = RequestContext(request, {
-        'producers_list': producer_list,
+        'producers_list': producers_list,
     })
     return HttpResponse(template.render(context))
 
@@ -21,7 +21,7 @@ def producer_list(request, producer_id):
 
 def description(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'goods/description.html', {'product': product})
+    return render(request, 'goods/product_details.html', {'product': product})
 
 
 def all_goods(request):
@@ -45,10 +45,10 @@ def add_product(request, producer_id):
                 return render(request, 'goods/add_product.html', {'form': form})
         else:
             error_message = "you don't have permission to access this page"
-            return render(request, 'goods/error.html', {'error_message': error_message})
+            return render(request, 'goods/authorization_error.html', {'error_message': error_message})
     else:
         error_message = 'you need to login to access this page'
-        return render(request, 'goods/error.html', {'error_message': error_message})
+        return render(request, 'goods/authorization_error.html', {'error_message': error_message})
 
 def edit(request,product_id):
     product = get_object_or_404(Product, pk=product_id)
@@ -67,7 +67,7 @@ def edit(request,product_id):
                 return render(request, 'goods/add_product.html', {'form': form})
         else:
             error_message = "you don't have permission to access this page"
-            return render(request, 'goods/error.html', {'error_message': error_message})
+            return render(request, 'goods/authorization_error.html', {'error_message': error_message})
     else:
         error_message = 'you need to login to access this page'
-        return render(request, 'goods/error.html', {'error_message': error_message})
+        return render(request, 'goods/authorization_error.html', {'error_message': error_message})

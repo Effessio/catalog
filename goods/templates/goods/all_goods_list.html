@@ -8,7 +8,7 @@
         <tbody>
         {% for product in product_list %}
         <tr>
-            <td>{{product.article}}</td>
+            <td>{{ product.article }}</td>
             <td><a href="{% url 'description' product.id %}">{{ product.name }}</a></td>
             <td><a href="{% url 'producer_list' product.producer.id %}">{{ product.producer }}</a></td>
 
