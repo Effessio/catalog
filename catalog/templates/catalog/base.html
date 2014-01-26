@@ -7,27 +7,19 @@
 </head>
 <body>
 {% block sidebar %}
-    <div>
-    <ul class="nav nav-tabs nav-stacked span4" style="background-color:#C6E2FF">
-        <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="{% url 'all_goods_list' %}">All</a></li>
-        <li>menu</li>
-        <li>Here should be menu</li>
-        <li>menu</li>
-        <li>Here should be menu</li>
-        <li>
-            {% if request.user.is_authenticated %}
+    <nav class="nav nav-tabs">
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'all_goods_list' %}">All</a>
+        {% if request.user.is_authenticated %}
                 User: {{ request.user.user_name}}
                 <a href="{% url 'user_logout' %}">logout</a>
                 {% if request.user.producer %}
-                    <li><a href="{% url 'product_add' request.user.producer.id %}">add product</a></li>
+                    <a href="{% url 'product_add' request.user.producer.id %}">add product</a>
                 {% endif %}
             {% else %}
             <a href="{% url 'user_login' %}">login</a>
             {% endif %}
-        </li>
-    </ul>
-    </div>
+    </nav>
 {% endblock %}
 {% block content %}{% endblock %}
 
