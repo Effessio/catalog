@@ -8,7 +8,7 @@
         <p class="span3"><strong>edit date</strong> {{ product.edit_date}} </p>
         <p class="span3">{{ product.pub_date}} </p>
         {% if request.user.is_authenticated and product.producer.moderator == request.user %}
-                <p class = "span3"><a href="{%url 'edit' product.id%}">edit</a></p>
+                <p class = "span3"><a href="{%url 'product_edit' product.id%}">edit</a></p>
     {% endif %}
     </article>
 </div>
