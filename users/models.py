@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, \
     PermissionsMixin, BaseUserManager
 
-
 class MyUserManager(BaseUserManager):
 
     def create_user(self, user_name, password):
@@ -24,6 +23,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = MyUserManager()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+
 
     def __unicode__(self):
         return self.user_name

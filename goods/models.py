@@ -18,6 +18,7 @@ class Product(models.Model):
     producer = models.ForeignKey(Producer)
     pub_date = models.DateTimeField('date created', auto_now_add=True)
     edit_date = models.DateTimeField('date edited', auto_now=True)
+    user = models.ManyToManyField(User)
 
     def __unicode__(self):
         return self.name

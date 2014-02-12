@@ -47,3 +47,6 @@ def bad(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/goods')
+
+def user_wishlist(request):
+    return render(request, 'users/wishlist.html')

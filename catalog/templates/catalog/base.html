@@ -3,6 +3,8 @@
 <head>
     {% load staticfiles %}
        <link rel="stylesheet" type="text/css" href="{% static 'goods/bootstrap.css' %}" />
+       <script type="text/javascript" src="/static/jquery.js">
+        </script>
     <title></title>
 </head>
 <body>
@@ -13,6 +15,7 @@
         {% if request.user.is_authenticated %}
                 User: {{ request.user.user_name}}
                 <a href="{% url 'user_logout' %}">logout</a>
+                <a href="{% url 'user_wishlist' %}">wishlist</a>
                 {% if request.user.producer %}
                     <a href="{% url 'product_add' request.user.producer.id %}">add product</a>
                 {% endif %}

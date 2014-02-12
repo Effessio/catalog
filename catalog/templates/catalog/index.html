@@ -2,13 +2,49 @@
 {% block sidebar %} {{ block.super }} {% endblock %}
 {% block content %}
 {% if producers_list %}
+    {% comment %}
     <div>
     <ul class="span4">
     {% for producer in producers_list %}
-        <li><a href="{% url 'producer_list' producer.id %}">{{ producer.name }}</a></li>
+        <li class='producer' id="{{ producer.id }}"> {{ producer.name }} </li>
+        <li><ul class="producer_goods" id="pg_{{ producer.id }}"></ul></li>
     {% endfor %}
     </ul>
     </div>
+    {% endcomment %}
+    <div>
+       {% for producer in producers_list %}
+            <div class='producer' id="{{ producer.id }}" style="background-color:#C6E2FF">
+                <h1>{{ producer.name }}</h1>
+                <div class="producer_goods" id="pg_{{ producer.id }}" style="background-color:#F0FFFF" ></div>
+            </div>
+
+       {% endfor %}
+    </div>
+<script>
+$('.producer').one('click', function(){
+    i = $(this).attr('id');
+    $.post("/goods/ajax/",{data:i},
+        function(data_from_server){
+            console.log(data_from_server);
+            parsed_data=JSON.parse(data_from_server);
+            for (var k=0; k<parsed_data.length; k++){
+                var needed_url='/goods/products/'+parsed_data[k]['id']+'/';
+                $('.producer_goods#pg_'+i).append('<li><a href="'+needed_url+'">'+parsed_data[k]['name']+'</a></li>');
+                console.log(needed_url);
+                $('.producer_goods#pg_'+i).slideDown(100);
+        }
+    }
+    );
+});
+$('.producer').click(function(){
+    i = $(this).attr('id');
+    $('.producer_goods').slideToggle(100);
+}
+);
+</script>
+
+
 {% else %}
     <p>No producers are available.</p>
 {% endif %}

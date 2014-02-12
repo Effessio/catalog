@@ -4,6 +4,9 @@ from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from goods.forms import ProductForm
+from users.models import User
+from MySQLdb import *
+import json
 
 
 def index(request):
@@ -67,3 +70,25 @@ def product_edit(request,product_id):
     else:
         error_message = "you don't have permission to access this page"
         return render(request, 'goods/authorization_error.html', {'error_message': error_message})
+
+
+@login_required(login_url='/users/login')
+def product_like(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    user = get_object_or_404(User, pk=request.user.id)
+    product.user.add(user)
+    product.save()
+
+    return HttpResponseRedirect(product.get_absolute_url())
+
+
+def producer_list2(request):
+    outcome = []
+    if request.method == "POST" :
+        if request.POST.get('data'):
+            #producer = get_object_or_404(Producer, pk=request.POST.get('data'))
+            #prod_list=producer.product_set.all()
+            for p in Product.objects.raw('SELECT id,name FROM goods_product WHERE producer_id = %s', [request.POST.get('data')]):
+                outcome.append({'id': p.id, 'name': p.name})
+            outcome = json.dumps(outcome)
+        return HttpResponse(outcome)

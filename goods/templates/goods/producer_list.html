@@ -1,10 +1,40 @@
 {% extends "catalog/base.html" %}
 {% block sidebar %} {{ block.super }} {% endblock %}
 {% block content %}
+
+
+
+
     <h1> {{ producer.name }} </h1>
-    <ul class="span4">
+    <ul class="span4" id="change">
     {% for product in producer.product_set.all %}
         <li><a href="{% url 'description' product.id %}">{{ product.name }}</a></li>
     {% endfor %}
     </ul>
+
+
+<p id="demo">Click the button sort goods by name".</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction()
+{
+var products = [];
+{% for product in producer.product_set.all %}
+products.push('{{ product.name }}');
+{% endfor %}
+products.sort();
+
+for (var i = 0; i < 2; i++) {
+   products[i]="<li>"+products[i]+"</li>";
+}
+
+
+var x=document.getElementById("change");
+x.innerHTML=products;
+
+}
+</script>
+
 {% endblock %}
