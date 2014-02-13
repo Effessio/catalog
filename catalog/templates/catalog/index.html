@@ -39,7 +39,8 @@ $('.producer').one('click', function(){
 });
 $('.producer').click(function(){
     i = $(this).attr('id');
-    $('.producer_goods').slideToggle(100);
+    $('.producer_goods').slideUp(100);
+    $('.producer_goods#pg_'+i).slideDown(100);
 }
 );
 </script>
