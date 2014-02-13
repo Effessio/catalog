@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.paginator import Paginator
 from goods.models import Producer, Product
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
@@ -86,9 +87,8 @@ def producer_list2(request):
     outcome = []
     if request.method == "POST" :
         if request.POST.get('data'):
-            #producer = get_object_or_404(Producer, pk=request.POST.get('data'))
-            #prod_list=producer.product_set.all()
-            for p in Product.objects.raw('SELECT id,name FROM goods_product WHERE producer_id = %s', [request.POST.get('data')]):
+            for p in Product.objects.raw('SELECT id,name FROM goods_product WHERE producer_id = %s',
+                                         [request.POST.get('data')]):
                 outcome.append({'id': p.id, 'name': p.name})
             outcome = json.dumps(outcome)
         return HttpResponse(outcome)
@@ -100,8 +100,16 @@ def fillup(request):
         new_producer=Producer(name="Producer"+str(num+i+1),pub_date= datetime.datetime.now())
         new_producer.save()
         for j in range(5):
-            new_product=Product(name="Some product "+str(j+1)+' of producer '+str(num+i+1), producer_id=new_producer.id, description = 'some description')
+            new_product=Product(article=(num+i+1)*10+j+1, name="Some product "+str(j+1)+' of producer '+str(num+i+1),
+                                producer_id=new_producer.id, description = 'some description')
             new_product.save()
             print j
     return HttpResponseRedirect('../')
+
+def all_goods_with_pages(request):
+    product_list = Product.objects.all()
+    p=Paginator(product_list, 10)
+    print p.page_range
+    return HttpResponse(p.page_range)
+
 
