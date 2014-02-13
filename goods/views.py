@@ -5,12 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from goods.forms import ProductForm
 from users.models import User
-from MySQLdb import *
+import datetime
 import json
 
 
 def index(request):
-    producers_list = Producer.objects.order_by('-pub_date')[:5]
+    producers_list = Producer.objects.order_by('pub_date')[:10]
     template = loader.get_template('catalog/index.html')
     context = RequestContext(request, {
         'producers_list': producers_list,
@@ -92,3 +92,16 @@ def producer_list2(request):
                 outcome.append({'id': p.id, 'name': p.name})
             outcome = json.dumps(outcome)
         return HttpResponse(outcome)
+
+
+def fillup(request):
+    num = Producer.objects.count()
+    for i in range(10-num):
+        new_producer=Producer(name="Producer"+str(num+i+1),pub_date= datetime.datetime.now())
+        new_producer.save()
+        for j in range(5):
+            new_product=Product(name="Some product "+str(j+1)+' of producer '+str(num+i+1), producer_id=new_producer.id, description = 'some description')
+            new_product.save()
+            print j
+    return HttpResponseRedirect('../')
+

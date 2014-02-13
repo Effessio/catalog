@@ -11,5 +11,6 @@ urlpatterns = patterns('',
     url(r'^products/(?P<product_id>\d+)/edit/$', views.product_edit, name='product_edit'),
     url(r'^products/(?P<product_id>\d+)/like/$', views.product_like, name='product_like'),
     url(r'^ajax/$', views.producer_list2, name='producer_list2'),
+    url(r'^fillup/$', views.fillup, name ='fillup')
 
 )
