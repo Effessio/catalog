@@ -5,9 +5,11 @@
 {{ form.as_table }}
 <p><input type="submit" value="Submit" /></p>
 </form>
-
-
-
+<form class="aaa">
+    <input class="aaa" type="text"/>
 </form>
+<script>
+    $('.aaa').datepicker();
+</script>
 
 {% endblock %}
