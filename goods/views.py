@@ -18,6 +18,9 @@ def index(request):
     })
     return HttpResponse(template.render(context))
 
+def index_redirect(request):
+    return HttpResponseRedirect('/goods/')
+
 
 def producer_list(request, producer_id):
     producer = get_object_or_404(Producer, pk=producer_id)
@@ -26,7 +29,14 @@ def producer_list(request, producer_id):
 
 def description(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'goods/product_details.html', {'product': product})
+    temp = Product.objects.filter(user__id=request.user.id)
+    number_users = User.objects.filter(product__id=product.id).count()
+    if product in temp:
+        like = True
+    else:
+        like = False
+    print like
+    return render(request, 'goods/product_details.html', {'product': product, 'like': like, 'number_users':number_users})
 
 
 def all_goods(request):
@@ -80,6 +90,15 @@ def product_like(request, product_id):
     product.user.add(user)
     product.save()
 
+    return HttpResponseRedirect(product.get_absolute_url())
+
+
+@login_required(login_url='/users/login')
+def product_dislike(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    user = get_object_or_404(User, pk=request.user.id)
+    product.user.remove(user)
+    product.save()
     return HttpResponseRedirect(product.get_absolute_url())
 
 

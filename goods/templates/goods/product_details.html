@@ -2,18 +2,31 @@
 {% block sidebar %} {{ block.super }} {% endblock %}
 {% block content %}
 <div class="container" xmlns="http://www.w3.org/1999/html">
-    <h1> {{ product.name }} </h1>
+    <h1 class="name"> {{ product.name }} </h1>
     <article class="row">
-        <p class="span3"> {{ product.description}}</p>
-        <p class="span3"><strong>edit date</strong> {{ product.edit_date}} </p>
-        <p class="span3">{{ product.pub_date}} </p>
+        <p class="span2"> {{ product.description}}</p>
+        <p class="span2"><strong>edit date</strong> {{ product.edit_date}} </p>
+        <p class="span2">{{ product.pub_date}} </p>
         {% if request.user.is_authenticated and product.producer.moderator == request.user %}
-                <p class = "span3"><a href="{%url 'product_edit' product.id%}">edit</a></p>
+                <p class = "span2"><a href="{%url 'product_edit' product.id%}">edit</a></p>
 
         {% endif %}
-        {% if request.user.is_authenticated %}
-        <p class = "span3"><a href="{%url 'product_like' product.id%}">Like</a></p>
+        {% if like == False %}
+        <p class = "span2"><a href="{%url 'product_like' product.id%}">Like</a></p>
+        {% else %}
+        <p class = "span2"><a href="{%url 'product_dislike' product.id%}">Disike</a></p>
         {% endif %}
+        <p class="span2"> Liked by {{ number_users }} users </p>
     </article>
 </div>
+
+<script>
+    $('.name').click(function(){
+    $('.row').slideToggle(100);
+    }
+    );
+</script>
+
 {% endblock %}
+
+
