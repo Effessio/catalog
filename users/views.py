@@ -12,7 +12,7 @@ def user_form(request):
             user_name = form.cleaned_data['user_name']
             password = form.cleaned_data['password']
             User.objects.create_user(user_name, password)
-            return HttpResponseRedirect('users_list')
+            return HttpResponseRedirect('../')
     else:
         form = UserForm()
     return render(request, 'users/login_or_register.html', {'form': form})

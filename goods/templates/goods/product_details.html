@@ -11,10 +11,12 @@
                 <p class = "span2"><a href="{%url 'product_edit' product.id%}">edit</a></p>
 
         {% endif %}
-        {% if like == False %}
-        <p class = "span2"><a href="{%url 'product_like' product.id%}">Like</a></p>
-        {% else %}
-        <p class = "span2"><a href="{%url 'product_dislike' product.id%}">Disike</a></p>
+        {% if request.user.is_authenticated %}
+            {% if like == False %}
+            <p class = "span2"><a href="{%url 'product_like' product.id%}">Like</a></p>
+            {% else %}
+            <p class = "span2"><a href="{%url 'product_dislike' product.id%}">Disike</a></p>
+            {% endif %}
         {% endif %}
         <p class="span2"> Liked by {{ number_users }} users </p>
     </article>
